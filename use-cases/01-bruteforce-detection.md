@@ -41,7 +41,7 @@
 **Durée totale de l'attaque :** 55 secondes  
 **Fréquence moyenne :** 1 tentative toutes les 3-4 secondes  
 
-**Note :** Le compte n'a pas été verrouillé car la politique de verrouillage Windows n'était pas configurée sur ce poste de test (common dans les environnements de lab).
+**Note :** Le compte n'a pas été verrouillé car la politique de verrouillage Windows n'était pas configurée sur ce poste de test.
 
 ---
 
