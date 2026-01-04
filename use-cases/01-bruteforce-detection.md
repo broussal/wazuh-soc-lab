@@ -6,7 +6,7 @@
 **Sévérité :** 🔴 Critique (Level 10)  
 **Statut :** Détecté par le SIEM  
 **Vecteur d'attaque :** Bruteforce via PowerShell Remoting  
-**Cible :** Compte administrateur local `hbw`
+**Cible :** Compte administrateur local `hbw` 
 **Résultat :** Échec de l'attaque (mot de passe non trouvé)
 
 ---
