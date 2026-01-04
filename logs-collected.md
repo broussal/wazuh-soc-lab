@@ -1,10 +1,10 @@
-# 📊 Documentation des Logs Collectés - Wazuh SOC Lab
+#  Documentation des Logs Collectés - Wazuh SOC Lab
 
 Ce document liste exhaustivement tous les types de logs collectés par le lab Wazuh et leur utilité pour la détection.
 
 ---
 
-## 📋 Vue d'ensemble
+##  Vue d'ensemble
 
 ### Sources de logs actives
 
@@ -22,7 +22,7 @@ Ce document liste exhaustivement tous les types de logs collectés par le lab Wa
 
 ---
 
-## 🪟 1. Windows Event Logs
+##  1. Windows Event Logs
 
 ### 1.1 Security Log
 
@@ -139,7 +139,7 @@ Ce document liste exhaustivement tous les types de logs collectés par le lab Wa
 
 ---
 
-## 🔍 2. Sysmon (Microsoft-Windows-Sysmon/Operational)
+##  2. Sysmon (Microsoft-Windows-Sysmon/Operational)
 
 **Channel :** `Microsoft-Windows-Sysmon/Operational`  
 **Configuration :** SwiftOnSecurity sysmonconfig-export.xml  
@@ -268,19 +268,19 @@ Ce document liste exhaustivement tous les types de logs collectés par le lab Wa
 
 | Fonctionnalité | Event Logs natifs | Sysmon |
 |----------------|-------------------|--------|
-| Command line complète | ❌ (4688 limitée) | ✅ Event ID 1 |
-| Hashes fichiers | ❌ | ✅ SHA256, MD5, IMPHASH |
-| Connexions réseau | ❌ | ✅ Event ID 3 |
-| DLL loading | ❌ | ✅ Event ID 7 |
-| Process injection | ❌ | ✅ Event ID 8, 10 |
-| Registry changes | Partiel | ✅ Event ID 13 |
-| DNS queries | ❌ | ✅ Event ID 22 |
+| Command line complète |  (4688 limitée) |  Event ID 1 |
+| Hashes fichiers |  |  SHA256, MD5, IMPHASH |
+| Connexions réseau |  |  Event ID 3 |
+| DLL loading |  |  Event ID 7 |
+| Process injection |  |  Event ID 8, 10 |
+| Registry changes | Partiel |  Event ID 13 |
+| DNS queries |  |  Event ID 22 |
 
 **Conclusion :** Sysmon est **essentiel** pour la détection avancée.
 
 ---
 
-## 📁 3. File Integrity Monitoring (FIM)
+##  3. File Integrity Monitoring (FIM)
 
 **Type :** Module natif Wazuh  
 **Format :** JSON  
@@ -341,7 +341,7 @@ Ce document liste exhaustivement tous les types de logs collectés par le lab Wa
 
 ---
 
-## 🔒 4. Security Configuration Assessment (SCA)
+##  4. Security Configuration Assessment (SCA)
 
 **Type :** Module natif Wazuh  
 **Format :** JSON  
@@ -363,9 +363,9 @@ Ce document liste exhaustivement tous les types de logs collectés par le lab Wa
 - Catégories : Politiques de compte, audit, services, pare-feu, registre
 
 **Exemples de checks :**
-- ✅ "Minimum password length is set to 14 or more characters"
-- ❌ "Guest account is enabled" → Finding
-- ✅ "Windows Firewall is turned on"
+-  "Minimum password length is set to 14 or more characters"
+-  "Guest account is enabled" → Finding
+-  "Windows Firewall is turned on"
 
 #### **CIS Microsoft Windows 10 Standalone Benchmark**
 - Adapté pour postes standalone (non-domaine)
@@ -390,7 +390,7 @@ Not applicable: 15 checks
 
 ---
 
-## 📊 5. Statistiques et volumes
+##  5. Statistiques et volumes
 
 ### 5.1 Répartition des logs (7 derniers jours)
 
@@ -420,7 +420,7 @@ Not applicable: 15 checks
 
 ---
 
-## 🎯 6. Mapping MITRE ATT&CK
+##  6. Mapping MITRE ATT&CK
 
 ### Techniques détectées automatiquement
 
@@ -438,7 +438,7 @@ Not applicable: 15 checks
 
 ---
 
-## 🔧 7. Optimisation de la collecte
+##  7. Optimisation de la collecte
 
 ### Événements volontairement exclus
 
@@ -472,16 +472,3 @@ Not applicable: 15 checks
 </localfile>
 ```
 **Utilité :** Corrélation avec alertes antivirus
-
----
-
-## 📚 Ressources
-
-- [Windows Event ID Encyclopedia](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/)
-- [Sysmon Configuration Guide](https://github.com/SwiftOnSecurity/sysmon-config)
-- [Wazuh Ruleset Documentation](https://documentation.wazuh.com/current/user-manual/ruleset/)
-- [MITRE ATT&CK Matrix](https://attack.mitre.org/)
-
----
-
-*Documentation mise à jour : Janvier 2025*
