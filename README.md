@@ -89,7 +89,7 @@ L'environnement comprend :
 
 | Composant | Version | Fonction |
 |-----------|---------|----------|
-| Wazuh | 4.x | SIEM / XDR Platform |
+| Wazuh | 4.7 | SIEM / XDR Platform |
 | OpenSearch | Intégré | Indexation et stockage |
 | Ubuntu Server | 22.04 LTS | OS du manager |
 | Windows 10 | Pro | Agent endpoint |
