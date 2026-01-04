@@ -1,6 +1,6 @@
 # Cas SOC #2 : Reconnaissance et Discovery MITRE ATT&CK
 
-## 📋 Résumé exécutif
+##  Résumé exécutif
 
 **Type d'incident :** Activité de reconnaissance système  
 **Sévérité :** 🟡 Notable (Level 3-5)  
@@ -9,11 +9,11 @@
 **Cible :** Système WIN-AGENT-01  
 **Résultat :** Collecte d'informations système réussie (simulation)
 
-> **📝 Note :** Ce cas simule les actions qu'un attaquant effectue après avoir obtenu un accès initial à un système Windows, afin de cartographier l'environnement avant de poursuivre son attaque.
+> ** Note :** Ce cas simule les actions qu'un attaquant effectue après avoir obtenu un accès initial à un système Windows, afin de cartographier l'environnement avant de poursuivre son attaque.
 
 ---
 
-## 🎯 MITRE ATT&CK Framework
+##  MITRE ATT&CK Framework
 
 | Technique | ID | Tactique | Description |
 |-----------|----|---------|----|
@@ -28,7 +28,7 @@
 
 ---
 
-## 📅 Timeline de l'incident
+##  Timeline de l'incident
 
 ```
 [2026-01-03 15:45:00] Début de la phase de reconnaissance
@@ -41,7 +41,7 @@
 [2026-01-03 15:45:38] Commande 7 : netstat -ano (Network Connections Discovery)
 [2026-01-03 15:45:45] Commande 8 : arp -a (Network Discovery)
 [2026-01-03 15:45:52] Commande 9 : wmic process get name,processid,parentprocessid (Process Discovery via WMI)
-[2026-01-03 15:46:00] ⚠️ ALERTES WAZUH - Reconnaissance activity detected
+[2026-01-03 15:46:00]  ALERTES WAZUH - Reconnaissance activity detected
 [2026-01-03 15:46:02] Fin de la phase de reconnaissance
 ```
 
@@ -50,7 +50,7 @@
 
 ---
 
-## 🧪 Simulation de l'attaque
+##  Simulation de l'attaque
 
 ### Contexte
 
@@ -120,23 +120,23 @@ Write-Host "`n[*] Reconnaissance complete." -ForegroundColor Green
 **Informations collectées par l'attaquant :**
 
 ```
-✅ Compte actuel : WIN-AGENT-01\hbw (Administrateur local)
-✅ OS : Windows 10 Pro
-✅ Processeur : x64
-✅ Antivirus : Windows Defender (actif)
-✅ IP : 192.168.3.130
-✅ Gateway : 192.168.3.2
-✅ Machines réseau : 192.168.3.1, 192.168.3.129 (Wazuh Manager)
-✅ Connexions actives : RDP, DNS, HTTP
-✅ Processus critiques : svchost.exe, lsass.exe, etc.
-✅ Services auto-start : 47 services identifiés
+ Compte actuel : WIN-AGENT-01\hbw (Administrateur local)
+ OS : Windows 10 Pro
+ Processeur : x64
+ Antivirus : Windows Defender (actif)
+ IP : 192.168.3.130
+ Gateway : 192.168.3.2
+ Machines réseau : 192.168.3.1, 192.168.3.129 (Wazuh Manager)
+ Connexions actives : RDP, DNS, HTTP
+ Processus critiques : svchost.exe, lsass.exe, etc.
+ Services auto-start : 47 services identifiés
 ```
 
 **L'attaquant dispose maintenant d'une carte complète du système.**
 
 ---
 
-## 🚨 Détection Wazuh
+##  Détection Wazuh
 
 ### Alertes générées
 
@@ -213,17 +213,17 @@ Processus détectés :
 
 ---
 
-## 🔍 Investigation SOC L1
+##  Investigation SOC L1
 
 ### Étape 1 : Qualification de l'alerte
 
-✅ **Alerte confirmée comme vraie positive**
+ **Alerte confirmée comme vraie positive**
 
 **Critères de validation :**
-- ✅ Pattern suspect : Multiples commandes de discovery en succession rapide
-- ✅ Commandes typiques d'attaquant : whoami, net user, systeminfo, netstat
-- ✅ Séquence logique : Account → System → Network → Process discovery
-- ✅ Aucune tâche légitime ne justifie cette séquence
+-  Pattern suspect : Multiples commandes de discovery en succession rapide
+-  Commandes typiques d'attaquant : whoami, net user, systeminfo, netstat
+-  Séquence logique : Account → System → Network → Process discovery
+-  Aucune tâche légitime ne justifie cette séquence
 
 **Comportement attendu vs observé :**
 
@@ -275,21 +275,21 @@ Processus détectés :
 
 ```
 [Phase 1 - Initial Access] (Non observé dans ce cas)
-└─> Compromission compte hbw (phishing probable)
+> Compromission compte hbw (phishing probable)
 
-[Phase 2 - Discovery] ✅ DÉTECTÉ (ce cas)
-├─> T1087 - Account Discovery (whoami, net user)
-├─> T1082 - System Information Discovery (systeminfo)
-├─> T1016 - Network Config Discovery (ipconfig, route)
-├─> T1049 - Network Connections Discovery (netstat)
-├─> T1057 - Process Discovery (tasklist, wmic)
-└─> T1018 - Remote System Discovery (arp -a)
+[Phase 2 - Discovery]  DÉTECTÉ (ce cas)
+> T1087 - Account Discovery (whoami, net user)
+> T1082 - System Information Discovery (systeminfo)
+> T1016 - Network Config Discovery (ipconfig, route)
+> T1049 - Network Connections Discovery (netstat)
+> T1057 - Process Discovery (tasklist, wmic)
+> T1018 - Remote System Discovery (arp -a)
 
 [Phase 3 - Lateral Movement] (Probable prochaine étape)
-└─> Cible identifiée : 192.168.3.129 (Wazuh Manager)
+> Cible identifiée : 192.168.3.129 (Wazuh Manager)
 
 [Phase 4 - Collection / Exfiltration] (Non encore observé)
-└─> Objectif probable : Vol de données ou ransomware
+> Objectif probable : Vol de données ou ransomware
 ```
 
 **L'attaquant est à la phase 2 sur 7 de la Kill Chain.**
@@ -355,17 +355,17 @@ Dashboard Wazuh > Discover > Requêtes DQL :
 ```
 
 **Résultat :** Investigation complète pour identifier :
-- ✅ Vecteur d'accès initial (avant 15:45)
-- ✅ Actions post-reconnaissance (après 15:46)
-- ✅ Propagation potentielle (autres machines)
+-  Vecteur d'accès initial (avant 15:45)
+-  Actions post-reconnaissance (après 15:46)
+-  Propagation potentielle (autres machines)
 
 ---
 
-## ✅ Réponse et recommandations
+##  Réponse et recommandations
 
 ### Actions immédiates (en environnement production)
 
-**🔴 Confinement urgent :**
+** Confinement urgent :**
 1. **Isoler WIN-AGENT-01 du réseau**
    ```powershell
    # Bloquer toutes communications réseau sauf vers le SIEM
@@ -461,7 +461,7 @@ auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 
 ---
 
-## 📊 Résultat et conclusion
+##  Résultat et conclusion
 
 ### Bilan de l'incident
 
@@ -472,18 +472,18 @@ auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 | **Phase de l'attaque détectée** | Discovery (Phase 2/7) |
 | **Techniques MITRE identifiées** | 6 techniques |
 | **Événements analysés** | 568 événements |
-| **Impact** | ⚠️ Reconnaissance réussie (informations collectées) |
-| **Escalade** | ❌ Aucune (détecté avant lateral movement) |
+| **Impact** |  Reconnaissance réussie (informations collectées) |
+| **Escalade** |  Aucune (détecté avant lateral movement) |
 
 ### Leçons apprises
 
-✅ **Points forts :**
+ **Points forts :**
 - Sysmon Event ID 1 capture les commandes avec arguments complets
 - Wazuh corrèle automatiquement les événements de reconnaissance
 - Mapping MITRE ATT&CK facilite la compréhension de la phase d'attaque
 - Détection rapide (< 1 minute) permet une intervention précoce
 
-⚠️ **Points d'amélioration :**
+ **Points d'amélioration :**
 - Pas d'alerte immédiate Level 10+ pour reconnaissance (seulement Level 5)
 - Pas d'Active Response automatique (isolation réseau)
 - PowerShell Script Block Logging désactivé (logs incomplets)
@@ -492,21 +492,21 @@ auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 ### Scénario en environnement réel
 
 **Sans détection SIEM, l'attaquant aurait pu :**
-1. ✅ Identifier les comptes administrateurs (net localgroup administrators)
-2. ✅ Cartographier le réseau (arp -a → 192.168.3.129 identifié)
-3. ⚠️ Tenter un lateral movement vers le Wazuh Manager
-4. ⚠️ Installer un backdoor persistant
-5. ⚠️ Exfiltrer des données sensibles
-6. ⚠️ Déployer un ransomware
+1.  Identifier les comptes administrateurs (net localgroup administrators)
+2.  Cartographier le réseau (arp -a → 192.168.3.129 identifié)
+3.  Tenter un lateral movement vers le Wazuh Manager
+4.  Installer un backdoor persistant
+5.  Exfiltrer des données sensibles
+6.  Déployer un ransomware
 
 **Grâce à Wazuh, l'attaque a été détectée avant ces phases critiques.**
 
 ---
 
-**📅 Incident simulé le :** 3 janvier 2026  
-**👤 Analyste :** Hector Broussalis 
-**⏱️ Durée d'investigation :** 30 minutes  
-**✅ Statut final :** Incident clos - Simulation lab (reconnaissance détectée avec succès)
+**Incident simulé le :** 3 janvier 2026  
+**Analyste :** Hector Broussalis  
+**Durée d'investigation :** 30 minutes  
+**Statut final :** Incident clos - Simulation lab (reconnaissance détectée avec succès)
 
 ---
 
