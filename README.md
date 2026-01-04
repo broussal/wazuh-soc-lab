@@ -71,17 +71,16 @@ L'environnement comprend :
 ##  Structure du projet
 
 ```
-wazuh-soc-lab/
- README.md                    # Ce fichier
- setup.md                     # Guide d'installation détaillé
- architecture.md              # Schéma et description de l'infrastructure
- logs-collected.md            # Documentation des logs collectés
- use-cases/                   # Cas d'usage SOC L1
-    01-bruteforce-detection.md
-    02-reconnaissance-mitre.md
-    03-malware-suspected.md
- threat-hunting/              # Requêtes de hunting (à venir)
- runbooks/                    # Procédures de réponse (à venir)
+├── README.md                    # Ce fichier
+├── setup.md                     # Guide d'installation détaillé
+├── architecture.md              # Schéma et description de l'infrastructure
+├── logs-collected.md            # Documentation des logs collectés
+├── use-cases/                   # Cas d'usage SOC L1
+│   ├── 01-bruteforce-detection.md
+│   ├── 02-reconnaissance-mitre.md
+│   └── 03-malware-suspected.md
+├── threat-hunting/              # Requêtes de hunting (à venir)
+└── runbooks/                    # Procédures de réponse (à venir)
 ```
 
 ---
@@ -101,9 +100,9 @@ wazuh-soc-lab/
 
 ##  Métriques du lab
 
-- **Événements collectés :** 2900+ événements indexés
-- **Alertes Level ≥10 :** 2+ alertes critiques détectées
-- **Techniques MITRE :** 5+ techniques identifiées
+- **Événements collectés :** 3200+ événements indexés
+- **Alertes Level ≥10 :** 300+ alertes critiques détectées
+- **Techniques MITRE :** 20+ techniques identifiées
 - **Rétention des logs :** 14 jours (ISM policy)
 - **Taux de disponibilité :** 100% (environnement de lab)
 
@@ -150,10 +149,8 @@ wazuh-soc-lab/
 
 ##  Auteur
 
-**Candidat Analyste SOC Junior**  
+**Hector Broussalis**  
 Projet réalisé dans le cadre du développement de compétences pratiques en cybersécurité.
-
----
 
 ##  Licence
 
