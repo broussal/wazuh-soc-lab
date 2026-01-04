@@ -81,7 +81,7 @@ sudo bash wazuh-install.sh -a
 **Sauvegarder les credentials générés !**
 ```
 Username: admin
-Password: y?0bDO6T0Wpj1z+a27nvFgDm4dI40ONu  #  EXEMPLE - Noter le vôtre !
+Password: ********************************
 ```
 
 **Vérifier l'installation :**
@@ -115,10 +115,10 @@ CPU       : 2 vCPUs
 Disque    : 40 GB
 Réseau    : Même réseau que le manager (192.168.3.0/24)
 Nom       : WIN-AGENT-01
-IP        : 192.168.3.130 (statique)
+IP        : 192.168.3.130
 ```
 
-**Configuration IP statique (PowerShell admin) :**
+**Configuration IP statique (optionnel) :**
 ```powershell
 New-NetIPAddress -InterfaceAlias "Ethernet0" -IPAddress 192.168.3.130 -PrefixLength 24 -DefaultGateway 192.168.3.2
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 8.8.8.8,8.8.4.4
