@@ -1,16 +1,16 @@
-# 📋 Guide d'installation - Wazuh SOC Lab
+#  Guide d'installation - Wazuh SOC Lab
 
 Ce document décrit l'installation complète du lab Wazuh SIEM depuis zéro.
 
 ---
 
-## 📋 Prérequis
+##  Prérequis
 
 ### Matériel recommandé
-- **RAM :** 8 GB minimum (12 GB recommandé)
+- **RAM :** 8 GB minimum
 - **CPU :** 4 cores minimum
 - **Disque :** 100 GB d'espace libre
-- **Hyperviseur :** VMware Workstation / VirtualBox / ESXi
+- **Hyperviseur :** VMware Workstation (mon choix)/ VirtualBox / ESXi
 
 ### Connaissances requises
 - Administration Linux de base
@@ -19,7 +19,7 @@ Ce document décrit l'installation complète du lab Wazuh SIEM depuis zéro.
 
 ---
 
-## 🖥️ ÉTAPE 1 : Déploiement du Wazuh Manager
+##  ÉTAPE 1 : Déploiement du Wazuh Manager
 
 ### 1.1 Création de la VM Ubuntu
 
@@ -76,12 +76,12 @@ curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
 sudo bash wazuh-install.sh -a
 ```
 
-⏱️ **Durée :** 10-15 minutes
+⏱ **Durée :** 10-15 minutes
 
 **Sauvegarder les credentials générés !**
 ```
 Username: admin
-Password: ********************************
+Password: y?0bDO6T0Wpj1z+a27nvFgDm4dI40ONu  #  EXEMPLE - Noter le vôtre !
 ```
 
 **Vérifier l'installation :**
@@ -99,11 +99,11 @@ sudo systemctl status wazuh-dashboard
 - Utilisateur : `admin`
 - Mot de passe : celui généré lors de l'installation
 
-⚠️ **Certificat auto-signé :** Accepter l'exception de sécurité dans le navigateur.
+ **Certificat auto-signé :** Accepter l'exception de sécurité dans le navigateur.
 
 ---
 
-## 🪟 ÉTAPE 2 : Déploiement de l'Agent Windows
+##  ÉTAPE 2 : Déploiement de l'Agent Windows
 
 ### 2.1 Création de la VM Windows
 
@@ -115,10 +115,10 @@ CPU       : 2 vCPUs
 Disque    : 40 GB
 Réseau    : Même réseau que le manager (192.168.3.0/24)
 Nom       : WIN-AGENT-01
-IP        : 192.168.3.130
+IP        : 192.168.3.130 (statique)
 ```
 
-**Configuration IP statique (optionnel) :**
+**Configuration IP statique (PowerShell admin) :**
 ```powershell
 New-NetIPAddress -InterfaceAlias "Ethernet0" -IPAddress 192.168.3.130 -PrefixLength 24 -DefaultGateway 192.168.3.2
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 8.8.8.8,8.8.4.4
@@ -191,7 +191,7 @@ Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 5
 
 ---
 
-## ⚙️ ÉTAPE 3 : Configuration avancée
+##  ÉTAPE 3 : Configuration avancée
 
 ### 3.1 Configuration de l'agent Windows
 
@@ -200,9 +200,9 @@ Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 5
 C:\Program Files (x86)\ossec-agent\ossec.conf
 ```
 
-⚠️ **IMPORTANT :** Utiliser un éditeur qui préserve les line endings Unix (LF), pas CRLF !
-- ✅ Recommandé : Notepad++, VSCode, vim
-- ❌ À éviter : Notepad Windows (cause des problèmes)
+ **IMPORTANT :** Utiliser un éditeur qui préserve les line endings Unix (LF), pas CRLF !
+-  Recommandé : Notepad++, VSCode, vim
+-  À éviter : Notepad Windows (cause des problèmes)
 
 **Éditer le fichier (PowerShell admin) :**
 ```powershell
@@ -359,7 +359,7 @@ curl -X GET "https://localhost:9200/_plugins/_ism/policies/wazuh-14day-retention
 
 ---
 
-## ✅ Vérification de l'installation
+##  Vérification de l'installation
 
 ### Checklist finale
 
@@ -395,7 +395,7 @@ Get-Service Sysmon64  # Status = Running
 
 ---
 
-## 🧪 Test de fonctionnement
+##  Test de fonctionnement
 
 **Générer un événement de test sur Windows :**
 ```powershell
@@ -414,7 +414,7 @@ systeminfo
 
 ---
 
-## 🔧 Troubleshooting commun
+##  Troubleshooting commun
 
 ### Problème : Agent n'apparaît pas dans le Dashboard
 
@@ -463,29 +463,16 @@ Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 10
 
 ---
 
-## 📊 Résultat attendu
+##  Résultat attendu
 
-À la fin de ce setup, vous devriez avoir :
+À la fin de ce setup, on possède :
 
-- ✅ Manager Wazuh fonctionnel accessible via Dashboard Web
-- ✅ Agent Windows connecté et actif
-- ✅ Logs Windows (Security, System, Application) collectés
-- ✅ Sysmon installé et événements collectés
-- ✅ File Integrity Monitoring activé
-- ✅ Rétention des logs configurée (14 jours)
-- ✅ Environ 100-500 événements par jour générés
+-  Manager Wazuh fonctionnel accessible via Dashboard Web
+-  Agent Windows connecté et actif
+-  Logs Windows (Security, System, Application) collectés
+-  Sysmon installé et événements collectés
+-  File Integrity Monitoring activé
+-  Rétention des logs configurée (14 jours)
+-  Environ 100-500 événements par jour générés
 
-**Temps total d'installation :** 2-3 heures (selon l'expérience)
-
----
-
-## 📚 Ressources utiles
-
-- [Documentation officielle Wazuh](https://documentation.wazuh.com/)
-- [Règles Wazuh](https://documentation.wazuh.com/current/user-manual/ruleset/rules-classification.html)
-- [Sysmon Config par SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)
-- [MITRE ATT&CK Framework](https://attack.mitre.org/)
-
----
-
-*Installation réalisée : Janvier 2025*
+**Temps total d'installation :** 2-3 heures
