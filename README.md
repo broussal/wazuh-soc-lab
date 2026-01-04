@@ -94,7 +94,7 @@ L'environnement comprend :
 | Ubuntu Server | 22.04 LTS | OS du manager |
 | Windows 10 | Pro | Agent endpoint |
 | Sysmon | Config SwiftOnSecurity | Monitoring avancé Windows |
-| VMware Workstation | - | Hyperviseur |
+| VMware Workstation | Player 17 | Hyperviseur |
 
 ---
 
