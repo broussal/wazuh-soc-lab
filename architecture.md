@@ -345,13 +345,4 @@ C:\Program Files (x86)\ossec-agent\ossec.log  # Logs agent
 
 ---
 
-## 📚 Références techniques
-
-- [Architecture Wazuh officielle](https://documentation.wazuh.com/current/getting-started/architecture.html)
-- [Agent communication protocol](https://documentation.wazuh.com/current/user-manual/agent/agent-connection.html)
-- [OpenSearch cluster design](https://opensearch.org/docs/latest/tuning-your-cluster/)
-
----
-
-*Architecture déployée : Janvier 2025*  
 *Version Wazuh : 4.7.x*
