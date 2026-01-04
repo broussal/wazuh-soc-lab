@@ -268,13 +268,13 @@ Ce document liste exhaustivement tous les types de logs collectés par le lab Wa
 
 | Fonctionnalité | Event Logs natifs | Sysmon |
 |----------------|-------------------|--------|
-| Command line complète |  (4688 limitée) |  Event ID 1 |
-| Hashes fichiers |  |  SHA256, MD5, IMPHASH |
-| Connexions réseau |  |  Event ID 3 |
-| DLL loading |  |  Event ID 7 |
-| Process injection |  |  Event ID 8, 10 |
-| Registry changes | Partiel |  Event ID 13 |
-| DNS queries |  |  Event ID 22 |
+| Command line complète | ❌ (4688 limitée) | ✅ Event ID 1 |
+| Hashes fichiers | ❌ | ✅ SHA256, MD5, IMPHASH |
+| Connexions réseau | ❌ | ✅ Event ID 3 |
+| DLL loading | ❌ | ✅ Event ID 7 |
+| Process injection | ❌ | ✅ Event ID 8, 10 |
+| Registry changes | Partiel | ✅ Event ID 13 |
+| DNS queries | ❌ | ✅ Event ID 22 |
 
 **Conclusion :** Sysmon est **essentiel** pour la détection avancée.
 
