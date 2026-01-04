@@ -1,17 +1,19 @@
 # Cas SOC #1 : Détection de Bruteforce sur Compte Administrateur Local
 
-## 📋 Résumé exécutif
+##  Résumé exécutif
 
 **Type d'incident :** Tentative d'accès non autorisé par bruteforce  
-**Sévérité :** 🔴 Critique (Level 10)  
+**Sévérité :**  Critique (Level 10)  
 **Statut :** Détecté par le SIEM  
 **Vecteur d'attaque :** Bruteforce via PowerShell Remoting  
-**Cible :** Compte administrateur local `hbw`  
+**Cible :** Compte administrateur local `hbw` *(exemple - le nom varie selon votre environnement)*  
 **Résultat :** Échec de l'attaque (mot de passe non trouvé)
+
+> ** Note :** Dans ce cas, le compte ciblé est `hbw` (compte administrateur créé lors de l'installation de Windows). Dans votre propre lab, remplacez ce nom par votre compte administrateur local.
 
 ---
 
-## 🎯 MITRE ATT&CK Framework
+##  MITRE ATT&CK Framework
 
 | Attribut | Valeur |
 |----------|--------|
@@ -25,7 +27,7 @@
 
 ---
 
-## 📅 Timeline de l'incident
+##  Timeline de l'incident
 
 ```
 [2026-01-03 14:32:15] Début des tentatives d'authentification
@@ -34,27 +36,29 @@
 [2026-01-03 14:32:21] Échec #3 - Mot de passe incorrect
 [...]
 [2026-01-03 14:33:01] Échec #15 - Mot de passe incorrect
-[2026-01-03 14:33:03] ⚠️ ALERTE WAZUH - Multiple Logon Failures détectée
+[2026-01-03 14:33:03]  ALERTE WAZUH - Multiple Logon Failures détectée
 [2026-01-03 14:33:10] Fin des tentatives (dictionnaire épuisé)
 ```
 
 **Durée totale de l'attaque :** 55 secondes  
 **Fréquence moyenne :** 1 tentative toutes les 3-4 secondes  
 
-**Note :** Le compte n'a pas été verrouillé car la politique de verrouillage Windows n'était pas configurée sur ce poste de test.
+**Note :** Le compte n'a pas été verrouillé car la politique de verrouillage Windows n'était pas configurée sur ce poste de test (common dans les environnements de lab).
 
 ---
 
-## 🧪 Simulation de l'attaque
+##  Simulation de l'attaque
 
 ### Contexte
 Simulation d'un attaquant ayant obtenu un accès initial à un poste du réseau et tentant d'élever ses privilèges ou de réutiliser les credentials du compte administrateur `hbw` pour du lateral movement via PowerShell Remoting.
+
+> **Note :** Le compte `hbw` est le compte administrateur créé lors de l'installation de Windows dans ce lab. Il s'agit d'un compte actif utilisé quotidiennement, ce qui rend ce scénario particulièrement réaliste.
 
 ### Script d'attaque utilisé
 
 ```powershell
 # Script de simulation - Bruteforce sur compte local
-# ⚠️ À usage éducatif uniquement dans environnement de test
+#  À usage éducatif uniquement dans environnement de test
 
 # Liste de mots de passe à tester (dictionnaire simplifié)
 $passwords = @(
@@ -76,7 +80,7 @@ $passwords = @(
 )
 
 $target = "WIN-AGENT-01"
-$username = "hbw"
+$username = "hbw"  # Remplacez par votre nom de compte administrateur
 
 # Tentatives de connexion
 $attempt = 0
@@ -122,7 +126,7 @@ All passwords exhausted. Attack unsuccessful.
 
 ---
 
-## 🚨 Détection Wazuh
+##  Détection Wazuh
 
 ### Alerte générée
 
@@ -196,17 +200,17 @@ Security Log Events (extrait) :
 
 ---
 
-## 🔍 Investigation SOC L1
+##  Investigation SOC L1
 
 ### Étape 1 : Qualification de l'alerte
 
-✅ **Alerte confirmée comme vraie positive**
+ **Alerte confirmée comme vraie positive**
 
 **Critères de validation :**
-- ✅ Volume anormal : 15 tentatives en < 1 minute (seuil normal : 3-5/jour)
-- ✅ Cible sensible : Compte Administrateur (privilégié)
-- ✅ Pattern suspect : Intervalles réguliers (3-4 secondes)
-- ✅ Échecs successifs : Aucune authentification réussie
+-  Volume anormal : 15 tentatives en < 1 minute (seuil normal : 3-5/jour)
+-  Cible sensible : Compte Administrateur (privilégié)
+-  Pattern suspect : Intervalles réguliers (3-4 secondes)
+-  Échecs successifs : Aucune authentification réussie
 
 ### Étape 2 : Analyse de contexte
 
@@ -278,19 +282,19 @@ Dashboard Wazuh > Discover > Requêtes DQL :
 
 ---
 
-## ✅ Réponse et recommandations
+##  Réponse et recommandations
 
 ### Actions immédiates (en environnement production)
 
 **Confinement :**
-- 🔴 Isoler WIN-AGENT-01 du réseau (bloquer communication réseau)
-- 🔴 Déconnecter toutes les sessions actives sur le compte hbw
-- 🔴 Forcer la réinitialisation du mot de passe du compte hbw
+-  Isoler WIN-AGENT-01 du réseau (bloquer communication réseau)
+-  Déconnecter toutes les sessions actives sur le compte hbw
+-  Forcer la réinitialisation du mot de passe du compte hbw
 
 **Éradication :**
-- 🔴 Scanner WIN-AGENT-01 avec antivirus/EDR
-- 🔴 Rechercher processus suspects en cours d'exécution
-- 🔴 Analyser scheduled tasks et persistence mechanisms
+-  Scanner WIN-AGENT-01 avec antivirus/EDR
+-  Rechercher processus suspects en cours d'exécution
+-  Analyser scheduled tasks et persistence mechanisms
 
 **Récupération :**
 - 🟡 Réinitialiser le compte compromis avec mot de passe fort (20+ caractères)
@@ -319,6 +323,8 @@ Dashboard Wazuh > Discover > Requêtes DQL :
    # Le désactiver si nécessaire
    net user Administrator /active:no
    ```
+   
+   > **Note :** Le compte "Administrator" intégré Windows est généralement désactivé par défaut. Utiliser des comptes nommés (comme "hbw") avec privilèges administrateur est la bonne pratique. Assurez-vous simplement que ces comptes ont des mots de passe forts et sont bien surveillés.
 
 3. **Activer l'audit avancé des authentifications**
    ```
@@ -357,28 +363,28 @@ Dashboard Wazuh > Discover > Requêtes DQL :
 
 ---
 
-## 📊 Résultat et conclusion
+##  Résultat et conclusion
 
 ### Bilan de l'incident
 
 | Indicateur | Valeur |
 |------------|--------|
-| **Temps de détection (TTD)** | < 1 minute ⚡ |
+| **Temps de détection (TTD)** | < 1 minute  |
 | **Temps de qualification** | 5 minutes |
 | **Temps total de réponse (TTR)** | 15 minutes (simulation) |
-| **Impact** | ❌ Aucun (attaque échouée) |
-| **Données compromises** | ❌ Aucune |
+| **Impact** |  Aucun (attaque échouée) |
+| **Données compromises** |  Aucune |
 | **Systèmes affectés** | 1 (WIN-AGENT-01) |
 
 ### Leçons apprises
 
-✅ **Points forts :**
+ **Points forts :**
 - Détection rapide et efficace par Wazuh (< 1 minute)
 - Corrélation automatique des 15 événements 4625
 - Mapping MITRE ATT&CK correct (T1110)
 - Alerte de niveau approprié (Level 10 - Critique)
 
-⚠️ **Points d'amélioration :**
+ **Points d'amélioration :**
 - Absence de verrouillage de compte (politique non configurée)
 - Pas d'Active Response automatique
 - Pas d'alerte temps réel (email/Slack)
@@ -397,19 +403,10 @@ Dashboard Wazuh > Discover > Requêtes DQL :
 
 ---
 
-## 📚 Références
-
-- **MITRE ATT&CK :** [T1110 - Brute Force](https://attack.mitre.org/techniques/T1110/)
-- **Microsoft :** [Event ID 4625 - Logon Failure](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625)
-- **Wazuh :** [Rule 60204 - Multiple Logon Failures](https://documentation.wazuh.com/current/user-manual/ruleset/rules/60204.html)
-- **NIST :** [Incident Response Lifecycle](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf)
-
----
-
-**📅 Incident simulé le :** 3 janvier 2026  
-**👤 Analyste :** Hector Broussalis  
-**⏱️ Durée d'investigation :** 20 minutes  
-**✅ Statut final :** Incident clos - Fausse attaque (simulation lab)
+** Incident simulé le :** 3 janvier 2026  
+** Analyste :** Hector Broussalis
+** Durée d'investigation :** 20 minutes  
+** Statut final :** Incident clos - Fausse attaque (simulation lab)
 
 ---
 
