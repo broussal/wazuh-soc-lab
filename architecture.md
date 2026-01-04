@@ -1,10 +1,10 @@
-# 🏗️ Architecture du Wazuh SOC Lab
+# Architecture du Wazuh SOC Lab
 
 Ce document décrit l'architecture technique du lab SIEM Wazuh.
 
 ---
 
-## 📊 Schéma d'architecture
+## Schéma d'architecture
 
 ```mermaid
 graph TB
@@ -44,7 +44,7 @@ graph TB
 
 ---
 
-## 🖥️ Composants détaillés
+## Composants détaillés
 
 ### 1. Wazuh Manager (All-in-One Deployment)
 
@@ -184,7 +184,7 @@ graph TB
 
 ---
 
-## 🔄 Flux de données
+## Flux de données
 
 ### Étape 1 : Collecte (Agent Windows)
 ```
@@ -226,12 +226,12 @@ User Query (Dashboard) → OpenSearch Query (DQL)
 
 ---
 
-## 🔐 Sécurité de l'architecture
+## Sécurité de l'architecture
 
 ### Communication chiffrée
-- **Agent ↔ Manager :** TLS 1.2+ (certificats auto-signés)
-- **Dashboard ↔ Indexer :** HTTPS (certificats auto-signés)
-- **User ↔ Dashboard :** HTTPS
+- **Agent <-> Manager :** TLS 1.2+ (certificats auto-signés)
+- **Dashboard <-> Indexer :** HTTPS (certificats auto-signés)
+- **User <-> Dashboard :** HTTPS
 
 ### Authentification
 - **Dashboard :** Utilisateur `admin` + mot de passe fort généré
@@ -244,7 +244,7 @@ User Query (Dashboard) → OpenSearch Query (DQL)
 
 ---
 
-## 📈 Dimensionnement et performance
+## Dimensionnement et performance
 
 ### Volumes de données actuels
 
@@ -280,7 +280,7 @@ User Query (Dashboard) → OpenSearch Query (DQL)
 
 ---
 
-## 🛠️ Points de maintenance
+## Points de maintenance
 
 ### Fichiers de configuration critiques
 
@@ -315,7 +315,7 @@ C:\Program Files (x86)\ossec-agent\ossec.log  # Logs agent
 
 ---
 
-## 🔄 Plan de reprise après incident
+## Plan de reprise après incident
 
 ### Sauvegarde recommandée
 
