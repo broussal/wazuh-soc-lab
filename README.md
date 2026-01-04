@@ -49,7 +49,7 @@ L'environnement comprend :
 - **Résultat :** Alerte critique générée et détectée dans le dashboard
 
 ### ✅ Cas 2 : Reconnaissance MITRE ATT&CK
-- **Techniques détectées :** BOF
+- **Techniques détectées :**
   - T1087 - Account Discovery
   - T1082 - System Information Discovery
   - T1057 - Process Discovery
@@ -101,9 +101,9 @@ wazuh-soc-lab/
 
 ## 📈 Métriques du lab
 
-- **Événements collectés :** 2900+ événements indexés
-- **Alertes Level ≥10 :** 2+ alertes critiques détectées BOF
-- **Techniques MITRE :** 5+ techniques identifiées BOF
+- **Événements collectés :** 3200+ événements indexés
+- **Alertes Level ≥10 :** 300+ alertes critiques détectées
+- **Techniques MITRE :** 20+ techniques identifiées
 - **Rétention des logs :** 14 jours (ISM policy)
 - **Taux de disponibilité :** 100% (environnement de lab)
 
