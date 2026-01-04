@@ -403,10 +403,10 @@ Dashboard Wazuh > Discover > Requêtes DQL :
 
 ---
 
-** Incident simulé le :** 3 janvier 2026  
-** Analyste :** Hector Broussalis  
-** Durée d'investigation :** 20 minutes  
-** Statut final :** Incident clos - Fausse attaque (simulation lab)
+**Incident simulé le :** 3 janvier 2026  
+**Analyste :** Hector Broussalis  
+**Durée d'investigation :** 20 minutes  
+**Statut final :** Incident clos - Fausse attaque (simulation lab)
 
 ---
 
