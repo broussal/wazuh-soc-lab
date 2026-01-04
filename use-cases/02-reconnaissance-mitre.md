@@ -503,19 +503,8 @@ auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 
 ---
 
-## 📚 Références
-
-- **MITRE ATT&CK :** [TA0007 - Discovery](https://attack.mitre.org/tactics/TA0007/)
-- **T1087 :** [Account Discovery](https://attack.mitre.org/techniques/T1087/)
-- **T1082 :** [System Information Discovery](https://attack.mitre.org/techniques/T1082/)
-- **T1057 :** [Process Discovery](https://attack.mitre.org/techniques/T1057/)
-- **Sysmon :** [Event ID 1 - Process Creation](https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon)
-- **Wazuh :** [Rule 61603 - Reconnaissance Detection](https://documentation.wazuh.com/current/user-manual/ruleset/)
-
----
-
 **📅 Incident simulé le :** 3 janvier 2026  
-**👤 Analyste :** Portfolio SOC Lab  
+**👤 Analyste :** Hector Broussalis 
 **⏱️ Durée d'investigation :** 30 minutes  
 **✅ Statut final :** Incident clos - Simulation lab (reconnaissance détectée avec succès)
 
