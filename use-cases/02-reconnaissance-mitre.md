@@ -3,7 +3,7 @@
 ##  Résumé exécutif
 
 **Type d'incident :** Activité de reconnaissance système  
-**Sévérité :** 🟡 Notable (Level 3-5)  
+**Sévérité :** Notable (Level 3-5)  
 **Statut :** Détecté par le SIEM  
 **Vecteur d'attaque :** Commandes de discovery exécutées localement  
 **Cible :** Système WIN-AGENT-01  
