@@ -1,5 +1,7 @@
 #  Wazuh SOC Lab - Portfolio Cybersécurité
 
+Vidéo d'introduction : https://streamable.com/k90kof
+
 ##  Vue d'ensemble
 
 Ce projet présente un laboratoire SIEM (Security Information and Event Management) basé sur **Wazuh** déployé dans un environnement VMware. Il a été conçu pour démontrer des compétences pratiques en analyse de sécurité de niveau SOC L1, notamment la détection d'attaques alignées sur le framework **MITRE ATT&CK**.
