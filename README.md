@@ -1,6 +1,6 @@
 #  Wazuh SOC Lab - Portfolio Cybersécurité
 
-Vidéo d'introduction : https://streamable.com/k90kof
+[Vidéo d'introduction (1 min)](https://streamable.com/hh1j1u)
 
 ##  Vue d'ensemble
 
