@@ -6,10 +6,8 @@
 **Sévérité :**  Critique (Level 10)  
 **Statut :** Détecté par le SIEM  
 **Vecteur d'attaque :** Bruteforce via PowerShell Remoting  
-**Cible :** Compte administrateur local `hbw` *(exemple - le nom varie selon votre environnement)*  
+**Cible :** Compte administrateur local `hbw` 
 **Résultat :** Échec de l'attaque (mot de passe non trouvé)
-
-> ** Note :** Dans ce cas, le compte ciblé est `hbw` (compte administrateur créé lors de l'installation de Windows). Dans votre propre lab, remplacez ce nom par votre compte administrateur local.
 
 ---
 
@@ -51,8 +49,6 @@
 
 ### Contexte
 Simulation d'un attaquant ayant obtenu un accès initial à un poste du réseau et tentant d'élever ses privilèges ou de réutiliser les credentials du compte administrateur `hbw` pour du lateral movement via PowerShell Remoting.
-
-> **Note :** Le compte `hbw` est le compte administrateur créé lors de l'installation de Windows dans ce lab. Il s'agit d'un compte actif utilisé quotidiennement, ce qui rend ce scénario particulièrement réaliste.
 
 ### Script d'attaque utilisé
 
