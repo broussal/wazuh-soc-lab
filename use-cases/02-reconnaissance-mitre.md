@@ -9,7 +9,7 @@
 **Cible :** Système WIN-AGENT-01  
 **Résultat :** Collecte d'informations système réussie (simulation)
 
-> ** Note :** Ce cas simule les actions qu'un attaquant effectue après avoir obtenu un accès initial à un système Windows, afin de cartographier l'environnement avant de poursuivre son attaque.
+> **Note :** Ce cas simule les actions qu'un attaquant effectue après avoir obtenu un accès initial à un système Windows, afin de cartographier l'environnement avant de poursuivre son attaque.
 
 ---
 
